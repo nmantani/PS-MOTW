@@ -67,6 +67,7 @@ PS>
 # Overwriting existing MOTW of example.zip with new MOTW to simulate the behavior of Legacy Microsoft Edge
 # (EdgeHTML-based) when a file is downloaded with the "Save target as" context menu and saved to
 # non-default location.
+
 PS> .\Set-MOTW.ps1 example.zip -ReferrerUrl https://example.net/ -HostUrl https://example.net/example.zip -HostIpAddress 192.168.100.100 -Verbose
 Current MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
 
@@ -87,6 +88,7 @@ PS>
 
 ```powershell
 # Marking multiple JPEG files as downloaded from trusted sites (ZoneId = 2) with web browsers.
+
 PS> .\Set-MOTW.ps1 *.jpg -ZoneId 2 -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/
 PS>
 ```
@@ -94,12 +96,14 @@ PS>
 ```powershell
 # Simulating the behavior of "Extract all" built-in function of Windows Explorer that sets ReferrerUrl
 # for extracted files to the path of an archive file.
+
 PS> .\Set-MOTW.ps1 example\*.png -ReferrerUrl C:\Users\user\Desktop\example.zip
 PS>
 ```
 
 ```powershell
 # Simulating the behavior of old versions of SmartScreen that set AppZoneId=4 for an executable file.
+
 PS> .\Set-MOTW.ps1 example.exe -AppZoneId 4
 PS>
 ```
@@ -107,6 +111,7 @@ PS>
 ```powershell
 # Marking all files under C:\Users\user\Downloads with the parameters LastWriterPackageFamilyName
 # and AppDefinedZoneId.
+
 PS> .\Set-MOTW.ps1 C:\Users\user\Downloads -LastWriterPackageFamilyName Microsoft.Office.OneNote_8wekyb3d8bbwe -AppDefinedZoneId 0
 PS>
 ```
@@ -124,6 +129,7 @@ Specifies the path to show MOTW. This parameter is mandatory.
 ### Examples
 ```powershell
 # Showing MOTW of example.docx.
+
 PS> .\Get-MOTW.ps1 example.docx
 C:\Users\user\Desktop\example.docx:
 [ZoneTransfer]
@@ -135,6 +141,7 @@ PS>
 
 ```powershell
 # Showing MOTW of multiple Word document files.
+
 PS> .\Get-MOTW.ps1 *.docx
 C:\Users\user\Desktop\example1.docx:
 [ZoneTransfer]
@@ -152,6 +159,7 @@ PS>
 
 ```powershell
 # Showing MOTW of all files under C:\Users\user\Documents .
+
 PS> .\Get-MOTW.ps1 C:\Users\user\Documents
 C:\Users\user\Documents\word\example.docx:
 [ZoneTransfer]
@@ -181,18 +189,21 @@ Specifies the path to remove MOTW. This parameter is mandatory.
 ### Examples
 ```powershell
 # Removing MOTW from example.docx.
+
 PS> .\Remove-MOTW.ps1 example.docx
 PS>
 ```
 
 ```powershell
 # Removing MOTW from multiple JPEG files.
+
 PS> .\Remove-MOTW.ps1 *.jpg
 PS>
 ```
 
 ```powershell
 # Removing MOTW from all files under C:\Users\user\Downloads .
+
 PS> .\Remove-MOTW.ps1 C:\Users\user\Downloads
 PS>
 ```
