@@ -48,7 +48,7 @@ Speficies the string for HostIpAddress of MOTW (default: undefined). Legacy Micr
 Speficies the string for LastWriterPackageFamilyName of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
 
 - AppZoneId  
-Specifies AppZoneId of MOTW (default: undefined). AppDefinedZoneId and ZoneId cannot be used if this parameter is specified. Old versions of SmartScreen sets `AppZoneId=4` and remove ZoneId for an executable file when execution permission is given by clicking the "Run anyway" button. Recent versions of SmartScreen seem to just remove Zone.Identifier alternate data stream instead of setting `AppZoneId=4`.
+Specifies AppZoneId of MOTW (default: undefined). AppDefinedZoneId and ZoneId cannot be used if this parameter is specified. Old versions of SmartScreen set `AppZoneId=4` and remove ZoneId for an executable file when execution permission is given by clicking the "Run anyway" button. Recent versions of SmartScreen seem to just remove Zone.Identifier alternate data stream instead of setting `AppZoneId=4`.
 
 - AppDefinedZoneId  
 Specifies AppDefinedZoneId of MOTW (default: undefined). The purpose of AppDefinedZoneId is unknown and it is only mentioned in the [Zone.Identifier alternate data stream format](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/mt243886(v=vs.85)#zoneidentifier-alternate-data-stream-format) section of the document of [IZoneIdentifier2 interface](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/mt243886(v=vs.85)).
