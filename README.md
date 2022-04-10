@@ -1,18 +1,20 @@
 # PS-MOTW: PowerShell scripts to set / show / remove MOTW (Mark of the Web)
 MOTW (Mark of the Web) is an attribute to indicate the origin ([URL Security Zones](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms537183(v=vs.85))) of a file. Applications such as web browsers and email clients set MOTW for downloaded files and email attachments that come from the internet. MOTW is stored in Zone.Identifier NTFS alternate data stream.
 
-Though MOTW can be removed with Windows Explorer by [ticking the "Unblock" checkbox](https://support.microsoft.com/en-us/topic/block-suspicious-macros-in-office-on-windows-10-s-60785abc-d8b8-4b80-8f5d-67ddbee213e9) in the file properties window or with [Unblock-File PowerShell cmdlet](https://docs.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-7.1), Windows does not provide the way to manually set or show MOTW. So I created the following PowerShell scripts. These scripts can be used for testing digital forensic tools, defense mechanism of Microsoft Office, and so on.
+Though MOTW can be removed with Windows Explorer by [ticking the "Unblock" checkbox](https://support.microsoft.com/en-us/topic/block-suspicious-macros-in-office-on-windows-10-s-60785abc-d8b8-4b80-8f5d-67ddbee213e9) in the file properties window or with [Unblock-File PowerShell cmdlet](https://docs.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-7.1), Windows does not provide similar functions to manually set or show MOTW. So I created the following PowerShell scripts. These scripts can be used to create example files for testing digital forensic tools, defense mechanism of Microsoft Office, and so on.
 
-- Set-MOTW.ps1
-- Get-MOTW.ps1
-- Remove-MOTW.ps1
+- [Set-MOTW.ps1](https://github.com/nmantani/PS-MOTW#set-motwps1)
+- [Get-MOTW.ps1](https://github.com/nmantani/PS-MOTW#get-motwps1)
+- [Remove-MOTW.ps1](https://github.com/nmantani/PS-MOTW#remove-motwps1)
 
 ## Set-MOTW.ps1
 Set-MOTW.ps1 sets MOTW for speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only -Verbose parameter of CommonParameters is supported.
 
 ### Usage
 ```powershell
-.\Set-MOTW.ps1 [-Path] <String> [[-AppDefinedZoneId] <Int16>] [[-AppZoneId] <Int16>] [[-ZoneId] <Int16>] [[-HostIpAddress] <String>] [[-LastWriterPackageFamilyName] <String>] [[-ReferrerUrl] <String>] [[-HostUrl] <String>] [<CommonParameters>]
+.\Set-MOTW.ps1 [-Path] <String> [[-ZoneId] <Int16>] [[-ReferrerUrl] <String>]
+ [[-HostUrl] <String>] [[-HostIpAddress] <String>] [[-LastWriterPackageFamilyName] <String>]
+ [[-AppZoneId] <Int16>] [[-AppDefinedZoneId] <Int16>] [<CommonParameters>]
 ```
 
 ### Parameters
@@ -62,7 +64,9 @@ PS>
 ```
 
 ```powershell
-# Overwriting existing MOTW of example.zip with new MOTW to simulate the behavior of Legacy Microsoft Edge (EdgeHTML-based) when a file is downloaded with the "Save target as" context menu and saved to non-default location.
+# Overwriting existing MOTW of example.zip with new MOTW to simulate the behavior of Legacy Microsoft Edge
+# (EdgeHTML-based) when a file is downloaded with the "Save target as" context menu and saved to
+# non-default location.
 PS> .\Set-MOTW.ps1 example.zip -ReferrerUrl https://example.net/ -HostUrl https://example.net/example.zip -HostIpAddress 192.168.100.100 -Verbose
 Current MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
 
@@ -88,7 +92,8 @@ PS>
 ```
 
 ```powershell
-# Simulating the behavior of "Extract all" built-in function of Windows Explorer that sets ReferrerUrl for extracted files to the path of an archive file.
+# Simulating the behavior of "Extract all" built-in function of Windows Explorer that sets ReferrerUrl
+# for extracted files to the path of an archive file.
 PS> .\Set-MOTW.ps1 example\*.png -ReferrerUrl C:\Users\user\Desktop\example.zip
 PS>
 ```
@@ -100,7 +105,8 @@ PS>
 ```
 
 ```powershell
-# Marking all files under C:\Users\user\Downloads with the parameters LastWriterPackageFamilyName and AppDefinedZoneId.
+# Marking all files under C:\Users\user\Downloads with the parameters LastWriterPackageFamilyName
+# and AppDefinedZoneId.
 PS> .\Set-MOTW.ps1 C:\Users\user\Downloads -LastWriterPackageFamilyName Microsoft.Office.OneNote_8wekyb3d8bbwe -AppDefinedZoneId 0
 PS>
 ```
