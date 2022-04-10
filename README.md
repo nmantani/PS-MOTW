@@ -1,4 +1,7 @@
 # PS-MOTW: PowerShell scripts to set / show / remove MOTW (Mark of the Web)
+
+![screenshot.png](images/screenshot.png)
+
 MOTW (Mark of the Web) is an attribute to indicate the origin ([URL Security Zones](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/ms537183(v=vs.85))) of a file. Applications such as web browsers and email clients set MOTW for downloaded files and email attachments that come from the internet. MOTW is stored in Zone.Identifier NTFS alternate data stream.
 
 Though MOTW can be removed with Windows Explorer by [ticking the "Unblock" checkbox](https://support.microsoft.com/en-us/topic/block-suspicious-macros-in-office-on-windows-10-s-60785abc-d8b8-4b80-8f5d-67ddbee213e9) in the file properties window or with [Unblock-File PowerShell cmdlet](https://docs.microsoft.com/ja-jp/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-7.1), Windows does not provide similar functions to manually set or show MOTW. So I created the following PowerShell scripts. These scripts can be used to create example files for testing digital forensic tools, defense mechanism of Microsoft Office, and so on.
