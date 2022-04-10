@@ -66,7 +66,6 @@ Specifies AppDefinedZoneId of MOTW (default: undefined). The purpose of AppDefin
 .EXAMPLE
 .\Set-MOTW.ps1 example.docx -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/example.docx -Verbose
 New MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
-
 [ZoneTransfer]
 ZoneId=3
 ReferrerUrl=https://example.com/
@@ -80,14 +79,12 @@ New MOTW information is shown with -Verbose option.
 .EXAMPLE
 .\Set-MOTW.ps1 example.zip -ReferrerUrl https://example.net/ -HostUrl https://example.net/example.zip -HostIpAddress 192.168.100.100 -Verbose
 Current MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
-
 [ZoneTransfer]
 ZoneId=3
 ReferrerUrl=https://example.com/
 HostUrl=https://example.com/download/example.zip
 
 New MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
-
 [ZoneTransfer]
 HostIpAddress=192.168.100.100
 ZoneId=3
@@ -181,8 +178,8 @@ foreach ($f in $files) {
     }
 
     if ($have_motw -and $VerbosePreference -eq "Continue") {
-        Write-Host "Current MOTW (Mark of the Web) of ${f}:`r`n"
-        Get-Content -Stream Zone.Identifier $f
+        Write-Host "Current MOTW (Mark of the Web) of ${f}:"
+        Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
     }
 
     $motw = "[ZoneTransfer]`r`n"
@@ -215,8 +212,13 @@ foreach ($f in $files) {
         $motw += "HostUrl=$HostUrl`r`n"
     }
 
-    Set-Content -ErrorVariable error -Path $f -Stream "Zone.Identifier" -Encoding utf8 -NoNewline -Value $motw
-
+    if ($PSVersionTable.PSVersion.Major -lt 6 -and [Console]::OutputEncoding.CodePage -eq 65001) {
+        # This is necessary to write Zone.Identfier without byte order mark on the environment with UTF-8 locale and PowerShell 5 or older
+        $utf8nobom = New-Object System.Text.UTF8Encoding $false
+        Set-Content -ErrorVariable error -Path $f -Stream Zone.Identifier -Encoding Byte -NoNewline -Value $utf8nobom.GetBytes($motw)
+    } else {
+        Set-Content -ErrorVariable error -Path $f -Stream Zone.Identifier -Encoding oem -NoNewline -Value $motw
+    }
 
     if ($error -ne "") {
         $count += 1
@@ -224,8 +226,8 @@ foreach ($f in $files) {
     }
 
     if ($VerbosePreference -eq "Continue") {
-        Write-Host "`r`nNew MOTW (Mark of the Web) of ${f}:`r`n"
-        Get-Content -Stream Zone.Identifier $f
+        Write-Host "`r`nNew MOTW (Mark of the Web) of ${f}:"
+        Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
 
         if ($count -lt ($files.Length - 1)) {
             Write-Host ""

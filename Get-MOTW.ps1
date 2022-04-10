@@ -110,7 +110,7 @@ foreach ($f in $files) {
 
     if ($have_motw) {
         Write-Host "${f}:"
-        Get-Content -Stream Zone.Identifier $f
+        Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
 
         if ($count -lt ($files.Length - 1)) {
             Write-Host ""
