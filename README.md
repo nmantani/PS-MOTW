@@ -213,6 +213,9 @@ PS> .\Remove-MOTW.ps1 C:\Users\user\Downloads
 PS>
 ```
 
+## See also
+[Comparison of MOTW (Mark of the Web) support of archiver software for Windows](https://github.com/nmantani/archiver-MOTW-support-comparison/)
+
 ## References
 - [Details about the Mark-of-the-Web (MOTW)](https://nolongerset.com/mark-of-the-web-details/) by Mike Wolfe ([@NoLongerSet](https://twitter.com/NoLongerSet))
 - [Downloads and the Mark-of-the-Web](https://textslashplain.com/2016/04/04/downloads-and-the-mark-of-the-web/) by Eric Lawrence ([@ericlaw](https://twitter.com/ericlaw))
