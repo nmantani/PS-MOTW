@@ -7,6 +7,8 @@ Though MOTW can be removed with Windows Explorer by [ticking the "Unblock" check
 - [Get-MOTW.ps1](https://github.com/nmantani/PS-MOTW#get-motwps1)
 - [Remove-MOTW.ps1](https://github.com/nmantani/PS-MOTW#remove-motwps1)
 
+How to use these script is described as follows. You can also use `Get-Help` cmdlet to see the same information.
+
 ## Set-MOTW.ps1
 Set-MOTW.ps1 sets MOTW for speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
 
@@ -95,7 +97,7 @@ PS>
 
 ```powershell
 # Simulating the behavior of "Extract all" built-in function of Windows Explorer that sets ReferrerUrl
-# for extracted files to the path of an archive file.
+# for extracted files to the path of a ZIP archive file.
 
 PS> .\Set-MOTW.ps1 example\*.png -ReferrerUrl C:\Users\user\Desktop\example.zip
 PS>

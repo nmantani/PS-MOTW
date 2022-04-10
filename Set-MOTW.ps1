@@ -110,7 +110,7 @@ Marking multiple JPEG files as downloaded from trusted sites (ZoneId = 2) with w
 
 Description
 ---------------------------------------------------------------
-Simulating the behavior of "Extract all" built-in function of Windows Explorer that sets ReferrerUrl for extracted files to the path of an archive file.
+Simulating the behavior of "Extract all" built-in function of Windows Explorer that sets ReferrerUrl for extracted files to the path of a ZIP archive file.
 
 .EXAMPLE
 .\Set-MOTW.ps1 example.exe -AppZoneId 4
