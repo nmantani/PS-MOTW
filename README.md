@@ -60,7 +60,6 @@ Specifies AppDefinedZoneId of MOTW (default: undefined). The purpose of AppDefin
 
 PS> .\Set-MOTW.ps1 example.docx -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/example.docx -Verbose
 New MOTW (Mark of the Web) of C:\Users\user\Desktop\example.docx:
-
 [ZoneTransfer]
 ZoneId=3
 ReferrerUrl=https://example.com/
@@ -75,14 +74,12 @@ PS>
 
 PS> .\Set-MOTW.ps1 example.zip -ReferrerUrl https://example.net/ -HostUrl https://example.net/example.zip -HostIpAddress 192.168.100.100 -Verbose
 Current MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
-
 [ZoneTransfer]
 ZoneId=3
 ReferrerUrl=https://example.com/
 HostUrl=https://example.com/download/example.zip
 
 New MOTW (Mark of the Web) of C:\Users\user\Desktop\example.zip:
-
 [ZoneTransfer]
 HostIpAddress=192.168.100.100
 ZoneId=3
