@@ -8,7 +8,7 @@ Though MOTW can be removed with Windows Explorer by [ticking the "Unblock" check
 - [Remove-MOTW.ps1](https://github.com/nmantani/PS-MOTW#remove-motwps1)
 
 ## Set-MOTW.ps1
-Set-MOTW.ps1 sets MOTW for speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only -Verbose parameter of CommonParameters is supported.
+Set-MOTW.ps1 sets MOTW for speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
 
 ### Usage
 ```powershell
@@ -112,7 +112,7 @@ PS>
 ```
 
 ## Get-MOTW.ps1
-Get-MOTW.ps1 shows MOTW (Mark of the Web) of speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
+Get-MOTW.ps1 shows MOTW (Mark of the Web) of speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
 ### Usage
 ```powershell
 .\Get-MOTW.ps1 [-Path] <String> [<CommonParameters>]
