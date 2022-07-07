@@ -90,7 +90,7 @@ Param(
 )
 
 if (!(Test-Path $Path)) {
-    Write-Host "Error: $Path does not exist."
+    Write-Output "Error: $Path does not exist."
     exit
 } elseif (Test-Path $Path -PathType Container) {
     $files = Get-ChildItem -Path $Path -Recurse | Select-Object -ExpandProperty FullName
@@ -109,14 +109,14 @@ foreach ($f in $files) {
     }
 
     if ($have_motw) {
-        Write-Host "${f}:"
+        Write-Output "${f}:"
         Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
 
         if ($count -lt ($files.Length - 1)) {
-            Write-Host ""
+            Write-Output ""
         }
     } elseif ($VerbosePreference -eq "Continue") {
-        Write-Host "$f does not have MOTW (Mark of the Web)."
+        Write-Output "$f does not have MOTW (Mark of the Web)."
     }
 
     $count += 1

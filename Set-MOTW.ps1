@@ -137,10 +137,10 @@ Param(
 
 if ($AppZoneId -ne -1) {
     if ($ZoneId -ne -1) {
-        Write-Host "Error: AppZoneId and ZoneId cannot be used at the same time."
+        Write-Output "Error: AppZoneId and ZoneId cannot be used at the same time."
         exit
     } elseif ($AppDefinedZoneId -ne -1) {
-        Write-Host "Error: AppDefinedZoneId and AppZoneId cannot be used at time same time."
+        Write-Output "Error: AppDefinedZoneId and AppZoneId cannot be used at time same time."
         exit
     }
 } elseif ($ZoneId -eq -1) {
@@ -148,18 +148,18 @@ if ($AppZoneId -ne -1) {
 }
 
 if ($ZoneId -ne -1 -and ($ZoneId -lt -1 -or $ZoneId -gt 4)) {
-    Write-Host "Error: ZoneId is invalid."
-    Write-Host "ZoneId has to be one of the following (default = 3):"
-    Write-Host "0: Local machine (URLZONE_LOCAL_MACHINE)"
-    Write-Host "1: Local intranet (URLZONE_INTRANET)"
-    Write-Host "2: Trusted sites (URLZONE_TRUSTED)"
-    Write-Host "3: Internet (URLZONE_INTERNET)"
-    Write-Host "4: Untrusted sites (URLZONE_UNTRUSTED)"
+    Write-Output "Error: ZoneId is invalid."
+    Write-Output "ZoneId has to be one of the following (default = 3):"
+    Write-Output "0: Local machine (URLZONE_LOCAL_MACHINE)"
+    Write-Output "1: Local intranet (URLZONE_INTRANET)"
+    Write-Output "2: Trusted sites (URLZONE_TRUSTED)"
+    Write-Output "3: Internet (URLZONE_INTERNET)"
+    Write-Output "4: Untrusted sites (URLZONE_UNTRUSTED)"
     exit
 }
 
 if (!(Test-Path $Path)) {
-    Write-Host "Error: $Path does not exist."
+    Write-Output "Error: $Path does not exist."
     exit
 } elseif (Test-Path $Path -PathType Container) {
     $files = Get-ChildItem -Path $Path -Recurse | Select-Object -ExpandProperty FullName
@@ -178,7 +178,7 @@ foreach ($f in $files) {
     }
 
     if ($have_motw -and $VerbosePreference -eq "Continue") {
-        Write-Host "Current MOTW (Mark of the Web) of ${f}:"
+        Write-Output "Current MOTW (Mark of the Web) of ${f}:"
         Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
     }
 
@@ -226,11 +226,11 @@ foreach ($f in $files) {
     }
 
     if ($VerbosePreference -eq "Continue") {
-        Write-Host "`r`nNew MOTW (Mark of the Web) of ${f}:"
+        Write-Output "`r`nNew MOTW (Mark of the Web) of ${f}:"
         Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
 
         if ($count -lt ($files.Length - 1)) {
-            Write-Host ""
+            Write-Output ""
         }
     }
 

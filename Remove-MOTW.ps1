@@ -67,7 +67,7 @@ function dummy {
 }
 
 if (!(Test-Path $Path)) {
-    Write-Host "Error: $Path does not exist."
+    Write-Output "Error: $Path does not exist."
     exit
 } elseif (Test-Path $Path -PathType Container) {
     $files = Get-ChildItem -Path $Path -Recurse | Select-Object -ExpandProperty FullName
@@ -87,7 +87,7 @@ foreach ($f in $files) {
     if ($have_motw) {
         Remove-Item -Stream Zone.Identifier $f
     } elseif ($VerbosePreference -eq "Continue") {
-        Write-Host "${f} does not have MOTW (Mark of the Web)."
+        Write-Output "${f} does not have MOTW (Mark of the Web)."
     }
 }
 
