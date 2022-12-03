@@ -86,22 +86,24 @@ Showing MOTW of all files under C:\Users\user\Documents .
 #>
 
 Param(
-        [parameter(mandatory=$true)][String]$Path
+        [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Paths
 )
 
-if (!(Test-Path $Path)) {
-    Write-Output "Error: $Path does not exist."
-    exit
-} elseif (Test-Path $Path -PathType Container) {
-    $files = Get-ChildItem -Path $Path -Recurse | Select-Object -ExpandProperty FullName
-} else {
-    $files = Resolve-Path $Path
+foreach ($p in $Paths) {
+    if (!(Test-Path $p)) {
+        Write-Output "Error: $p does not exist."
+        exit
+    } elseif (Test-Path $p -PathType Container) {
+        $files += @(Get-ChildItem -Force -Path $p -Recurse | Select-Object -ExpandProperty FullName)
+    } else {
+        $files += @(Resolve-Path $p)
+    }
 }
 
 $count = 0
 foreach ($f in $files) {
     $have_motw = $false
-    $streams = Get-Item -Stream * $f | Select-Object Stream
+    $streams = Get-Item -Force -Stream * $f | Select-Object Stream
     foreach ($s in $streams) {
         if ($s.Stream -eq "Zone.Identifier") {
             $have_motw = $true

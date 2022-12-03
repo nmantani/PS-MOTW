@@ -59,25 +59,23 @@ Removing MOTW from all files under C:\Users\user\Downloads .
 #>
 
 Param(
-    [parameter(mandatory=$true)][String]$Path
+    [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Paths
 )
 
-function dummy {
-    
-}
-
-if (!(Test-Path $Path)) {
-    Write-Output "Error: $Path does not exist."
-    exit
-} elseif (Test-Path $Path -PathType Container) {
-    $files = Get-ChildItem -Path $Path -Recurse | Select-Object -ExpandProperty FullName
-} else {
-    $files = Resolve-Path $Path
+foreach ($p in $Paths) {
+    if (!(Test-Path $p)) {
+        Write-Output "Error: $p does not exist."
+        exit
+    } elseif (Test-Path $p -PathType Container) {
+        $files += @(Get-ChildItem -Force -Path $p -Recurse | Select-Object -ExpandProperty FullName)
+    } else {
+        $files += @(Resolve-Path $p)
+    }
 }
 
 foreach ($f in $files) {
     $have_motw = $false
-    $streams = Get-Item -Stream * $f | Select-Object Stream
+    $streams = Get-Item -Force -Stream * $f | Select-Object Stream
     foreach ($s in $streams) {
         if ($s.Stream -eq "Zone.Identifier") {
             $have_motw = $true
@@ -85,7 +83,7 @@ foreach ($f in $files) {
     }
 
     if ($have_motw) {
-        Remove-Item -Stream Zone.Identifier $f
+        Remove-Item -Force -Stream Zone.Identifier $f
     } elseif ($VerbosePreference -eq "Continue") {
         Write-Output "${f} does not have MOTW (Mark of the Web)."
     }
