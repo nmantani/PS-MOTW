@@ -31,7 +31,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Shows MOTW (Mark of the Web).
 
 .DESCRIPTION
-Get-MOTW.ps1 shows MOTW (Mark of the Web) of speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
+Get-MOTW.ps1 shows MOTW (Mark of the Web) of specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 
 .PARAMETER Path
 Specifies the path to show MOTW. This parameter is mandatory.

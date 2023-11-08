@@ -31,7 +31,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Removes MOTW (Mark of the Web).
 
 .DESCRIPTION
-Remove-MOTW.ps1 removes MOTW (Mark of the Web) from speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
+Remove-MOTW.ps1 removes MOTW (Mark of the Web) from specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 
 .PARAMETER Path
 Specifies the path to remove MOTW. This parameter is mandatory.
