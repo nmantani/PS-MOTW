@@ -31,7 +31,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Sets MOTW (Mark of the Web).
 
 .DESCRIPTION
-Set-MOTW.ps1 sets MOTW for speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
+Set-MOTW.ps1 sets MOTW for specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 
 .PARAMETER Path
 Specifies the path to set MOTW. This parameter is mandatory.
@@ -46,16 +46,16 @@ Specifies the ZoneId value (default: 3):
 This parameter is always set unless AppZoneId is specified.
 
 .PARAMETER ReferrerUrl
-Speficies the string for ReferrerUrl value of MOTW (default: undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
+Specifies the string for ReferrerUrl value of MOTW (default: undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
 
 .PARAMETER HostUrl
-Speficies the string for the HostUrl value of MOTW (default = undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
+Specifies the string for the HostUrl value of MOTW (default = undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
 
 .PARAMETER HostIpAddress
-Speficies the string for HostIpAddress of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
+Specifies the string for HostIpAddress of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
 
 .PARAMETER LastWriterPackageFamilyName
-Speficies the string for LastWriterPackageFamilyName of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
+Specifies the string for LastWriterPackageFamilyName of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
 
 .PARAMETER AppZoneId
 Specifies AppZoneId of MOTW (default: undefined). AppDefinedZoneId and ZoneId cannot be used if this parameter is specified. Old versions of SmartScreen set "AppZoneId=4" and remove ZoneId for an executable file when execution permission is given by clicking the "Run anyway" button. Recent versions of SmartScreen seem to just remove Zone.Identifier alternate data stream instead of setting "AppZoneId=4".

@@ -13,7 +13,7 @@ Though MOTW can be removed with Windows Explorer by [ticking the "Unblock" check
 How to use these script is described as follows. You can also use `Get-Help` cmdlet to see the same information.
 
 ## Set-MOTW.ps1
-Set-MOTW.ps1 sets MOTW for speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
+Set-MOTW.ps1 sets MOTW for specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
 
 ### Usage
 ```powershell
@@ -36,16 +36,16 @@ Specifies the ZoneId value (default: 3):
 This parameter is always set unless AppZoneId is specified.
 
 - ReferrerUrl  
-Speficies the string for ReferrerUrl of MOTW (default: undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
+Specifies the string for ReferrerUrl of MOTW (default: undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
 
 - HostUrl  
-Speficies the string for HostUrl of MOTW (default: undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
+Specifies the string for HostUrl of MOTW (default: undefined). Google Chrome, Microsoft Edge (Blink-based), and Mozilla Firefox set this value.
 
 - HostIpAddress  
-Speficies the string for HostIpAddress of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
+Specifies the string for HostIpAddress of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
 
 - LastWriterPackageFamilyName  
-Speficies the string for LastWriterPackageFamilyName of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
+Specifies the string for LastWriterPackageFamilyName of MOTW (default: undefined). Legacy Microsoft Edge (EdgeHTML-based) sets this value.
 
 - AppZoneId  
 Specifies AppZoneId of MOTW (default: undefined). AppDefinedZoneId and ZoneId cannot be used if this parameter is specified. Old versions of SmartScreen set `AppZoneId=4` and remove ZoneId for an executable file when execution permission is given by clicking the "Run anyway" button. Recent versions of SmartScreen seem to just remove Zone.Identifier alternate data stream instead of setting `AppZoneId=4`.
@@ -119,7 +119,7 @@ PS>
 ```
 
 ## Get-MOTW.ps1
-Get-MOTW.ps1 shows MOTW (Mark of the Web) of speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
+Get-MOTW.ps1 shows MOTW (Mark of the Web) of specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the `-Verbose` parameter is supported in CommonParameters.
 ### Usage
 ```powershell
 .\Get-MOTW.ps1 [-Path] <String> [<CommonParameters>]
@@ -178,7 +178,7 @@ PS>
 ```
 
 ## Remove-MOTW.ps1
-Remove-MOTW.ps1 removes MOTW (Mark of the Web) from speficied files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
+Remove-MOTW.ps1 removes MOTW (Mark of the Web) from specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 ### Usage
 ```powershell
 .\Remove-MOTW.ps1 [-Path] <String> [<CommonParameters>]
