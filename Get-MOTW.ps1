@@ -34,7 +34,7 @@ Shows MOTW (Mark of the Web).
 Get-MOTW.ps1 shows MOTW (Mark of the Web) of specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 
 .PARAMETER Path
-Specifies the path to show MOTW. This parameter is mandatory.
+Specifies the path to show MOTW. This parameter is mandatory. The "-Path" string can be omitted. Multiple paths can be specified with a comma-separated list.
 
 .EXAMPLE
 .\Get-MOTW.ps1 example.docx
@@ -49,7 +49,7 @@ Description
 Showing MOTW of example.docx.
 
 .EXAMPLE
-.\Get-MOTW.ps1 *.docx
+.\Get-MOTW.ps1 *.docx,*.xlsx
 C:\Users\user\Desktop\example1.docx:
 [ZoneTransfer]
 ZoneId=3
@@ -62,9 +62,21 @@ ZoneId=3
 ReferrerUrl=https://example.com/
 HostUrl=https://example.com/download/
 
+C:\Users\user\Desktop\example3.xlsx:
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://example.com/
+HostUrl=https://example.com/download/
+
+C:\Users\user\Desktop\example4.xlsx:
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://example.com/
+HostUrl=https://example.com/download/
+
 Description
 ---------------------------------------------------------------
-Showing MOTW of multiple Word document files.
+Showing MOTW of Word files and Excel files.
 
 .EXAMPLE
 .\Get-MOTW.ps1 C:\Users\user\Documents
@@ -86,10 +98,10 @@ Showing MOTW of all files under C:\Users\user\Documents .
 #>
 
 Param(
-        [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Paths
+        [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Path
 )
 
-foreach ($p in $Paths) {
+foreach ($p in $Path) {
     if (!(Test-Path $p)) {
         Write-Output "Error: $p does not exist."
         exit

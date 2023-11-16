@@ -34,7 +34,7 @@ Sets MOTW (Mark of the Web).
 Set-MOTW.ps1 sets MOTW for specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 
 .PARAMETER Path
-Specifies the path to set MOTW. This parameter is mandatory.
+Specifies the path to set MOTW. This parameter is mandatory. The "-Path" string can be omitted. Multiple paths can be specified with a comma-separated list.
 
 .PARAMETER ZoneId
 Specifies the ZoneId value (default: 3):
@@ -96,11 +96,11 @@ Description
 Overwriting existing MOTW of example.zip with new MOTW to simulate the behavior of Legacy Microsoft Edge (EdgeHTML-based) when a file is downloaded with the "Save target as" context menu and saved to non-default location.
 
 .EXAMPLE
-.\Set-MOTW.ps1 *.jpg -ZoneId 2 -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/
+.\Set-MOTW.ps1 *.jpg,*.png -ZoneId 2 -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/
 
 Description
 ---------------------------------------------------------------
-Marking multiple JPEG files as downloaded from trusted sites (ZoneId = 2) with web browsers.
+Marking JPEG files and PNG files as downloaded from trusted sites (ZoneId = 2) with web browsers.
 
 .EXAMPLE
 .\Set-MOTW.ps1 example\*.png -ReferrerUrl C:\Users\user\Desktop\example.zip
@@ -134,7 +134,7 @@ Param(
     [String]$LastWriterPackageFamilyName,
     [Int16]$AppZoneId = -1,
     [Int16]$AppDefinedZoneId = -1,
-    [parameter(ValueFromRemainingArguments=$true)]$Paths
+    [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Path
 )
 
 if ($AppZoneId -ne -1) {
@@ -160,7 +160,7 @@ if ($ZoneId -ne -1 -and ($ZoneId -lt -1 -or $ZoneId -gt 4)) {
     exit
 }
 
-foreach ($p in $Paths) {
+foreach ($p in $Path) {
     if (!(Test-Path $p)) {
         Write-Output "Error: $p does not exist."
         exit
@@ -184,6 +184,7 @@ foreach ($f in $files) {
     if ($have_motw -and $VerbosePreference -eq "Continue") {
         Write-Output "Current MOTW (Mark of the Web) of ${f}:"
         Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
+        Write-Output ""
     }
 
     $motw = "[ZoneTransfer]`r`n"
@@ -230,7 +231,7 @@ foreach ($f in $files) {
     }
 
     if ($VerbosePreference -eq "Continue") {
-        Write-Output "`r`nNew MOTW (Mark of the Web) of ${f}:"
+        Write-Output "New MOTW (Mark of the Web) of ${f}:"
         Get-Content -Path $f -Stream Zone.Identifier -Encoding oem
 
         if ($count -lt ($files.Length - 1)) {

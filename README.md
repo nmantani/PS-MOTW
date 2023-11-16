@@ -24,7 +24,7 @@ Set-MOTW.ps1 sets MOTW for specified files. If a directory is specified, all fil
 
 ### Parameters
 - Path  
-Specifies the path to set MOTW. This parameter is mandatory.
+Specifies the path to set MOTW. This parameter is mandatory. The `-Path` string can be omitted. Multiple paths can be specified with a comma-separated list.
 
 - ZoneId  
 Specifies the ZoneId value (default: 3):  
@@ -89,9 +89,9 @@ PS>
 ```
 
 ```powershell
-# Marking multiple JPEG files as downloaded from trusted sites (ZoneId = 2) with web browsers.
+# Marking JPEG files and PNG files as downloaded from trusted sites (ZoneId = 2) with web browsers.
 
-PS> .\Set-MOTW.ps1 *.jpg -ZoneId 2 -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/
+PS> .\Set-MOTW.ps1 *.jpg,*.png -ZoneId 2 -ReferrerUrl https://example.com/ -HostUrl https://example.com/download/
 PS>
 ```
 
@@ -126,7 +126,7 @@ Get-MOTW.ps1 shows MOTW (Mark of the Web) of specified files. If a directory is 
 ```
 ### Parameters
 - Path  
-Specifies the path to show MOTW. This parameter is mandatory.
+Specifies the path to show MOTW. This parameter is mandatory. The `-Path` string can be omitted. Multiple paths can be specified with a comma-separated list.
 
 ### Examples
 ```powershell
@@ -142,9 +142,9 @@ PS>
 ```
 
 ```powershell
-# Showing MOTW of multiple Word document files.
+# Showing MOTW of Word files and Excel files.
 
-PS> .\Get-MOTW.ps1 *.docx
+PS> .\Get-MOTW.ps1 *.docx,*.xlsx
 C:\Users\user\Desktop\example1.docx:
 [ZoneTransfer]
 ZoneId=3
@@ -157,6 +157,18 @@ ZoneId=3
 ReferrerUrl=https://example.com/
 HostUrl=https://example.com/download/
 PS>
+
+C:\Users\user\Desktop\example3.xlsx:
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://example.com/
+HostUrl=https://example.com/download/
+
+C:\Users\user\Desktop\example4.xlsx:
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://example.com/
+HostUrl=https://example.com/download/
 ```
 
 ```powershell
@@ -186,7 +198,7 @@ Remove-MOTW.ps1 removes MOTW (Mark of the Web) from specified files. If a direct
 
 ### Parameters
 - Path  
-Specifies the path to remove MOTW. This parameter is mandatory.
+Specifies the path to remove MOTW. This parameter is mandatory. The "-Path" string can be omitted. Multiple paths can be specified with a comma-separated list.
 
 ### Examples
 ```powershell
@@ -197,9 +209,9 @@ PS>
 ```
 
 ```powershell
-# Removing MOTW from multiple JPEG files.
+# Removing MOTW from JPEG files and PNG files.
 
-PS> .\Remove-MOTW.ps1 *.jpg
+PS> .\Remove-MOTW.ps1 *.jpg,*.png
 PS>
 ```
 

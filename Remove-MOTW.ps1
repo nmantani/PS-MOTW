@@ -34,7 +34,7 @@ Removes MOTW (Mark of the Web).
 Remove-MOTW.ps1 removes MOTW (Mark of the Web) from specified files. If a directory is specified, all files under the directory are processed recursively. The * wildcard can be used to specify multiple files. Only the "-Verbose" parameter is supported in CommonParameters.
 
 .PARAMETER Path
-Specifies the path to remove MOTW. This parameter is mandatory.
+Specifies the path to remove MOTW. This parameter is mandatory. The "-Path" string can be omitted. Multiple paths can be specified with a comma-separated list.
 
 .EXAMPLE
 .\Remove-MOTW.ps1 example.docx
@@ -44,11 +44,11 @@ Description
 Removing MOTW from example.docx.
 
 .EXAMPLE
-.\Remove-MOTW.ps1 *.jpg
+.\Remove-MOTW.ps1 *.jpg,*png
 
 Description
 ---------------------------------------------------------------
-Removing MOTW from multiple JPEG files.
+Removing MOTW from JPEG files and PNG files.
 
 .EXAMPLE
 .\Remove-MOTW.ps1 C:\Users\user\Downloads
@@ -59,10 +59,10 @@ Removing MOTW from all files under C:\Users\user\Downloads .
 #>
 
 Param(
-    [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Paths
+    [parameter(mandatory=$true, ValueFromRemainingArguments=$true)]$Path
 )
 
-foreach ($p in $Paths) {
+foreach ($p in $Path) {
     if (!(Test-Path $p)) {
         Write-Output "Error: $p does not exist."
         exit
